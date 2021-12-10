@@ -1,0 +1,14 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "fastify": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.12"
+  }
+}
