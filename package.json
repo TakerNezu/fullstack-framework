@@ -7,15 +7,20 @@
   "private": true,
   "workspaces": [
     "server",
-    "front"
+    "front",
+    "mock",
+    "prisma"
   ],
   "scripts": {
     "server:build": "esbuild server/server.ts --outfile=server/server.js --bundle --platform=node",
-    "server:run": "yarn run server:build && node server/server.js"
+    "server:dev": "yarn run server:build && node server/server.js",
+    "front:build": "esbuild front/src/index.tsx --outfile=front/public/index.js --bundle --platform=browser",
+    "front:dev": "yarn run front:build && esbuild --servedir=front/public"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
     "esbuild": "^0.14.2",
+    "msw": "^0.36.3",
     "typescript": "^4.5.3"
   }
 }

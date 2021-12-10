@@ -1,4 +1,4 @@
-import fastify, {FastifyPluginCallback} from "fastify";
+import {FastifyPluginCallback} from "fastify";
 
 export const top: FastifyPluginCallback = (fastify, _, done) => {
   // fastify.addHook("onRequest", (request) => request.jwtVerify());
