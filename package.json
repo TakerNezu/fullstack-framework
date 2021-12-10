@@ -9,8 +9,13 @@
     "server",
     "front"
   ],
+  "scripts": {
+    "server:build": "esbuild server/server.ts --outfile=server/server.js --bundle --platform=node",
+    "server:run": "yarn run server:build && node server/server.js"
+  },
   "devDependencies": {
     "dotenv": "^10.0.0",
+    "esbuild": "^0.14.2",
     "typescript": "^4.5.3"
   }
 }
