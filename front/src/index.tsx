@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 // import './index.css';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
+import {worker} from "$mock/browser";
+
+worker.start()
+  .then(result => console.log(result))
+  .catch(err => console.log(err))
 
 ReactDOM.render(
   <React.StrictMode>
