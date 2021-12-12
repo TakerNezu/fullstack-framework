@@ -18,7 +18,7 @@ export type postReq = {
 export type postRes = {
   post: Array<Post & {
     comment: Array<{
-      id: Comment["id"],
+      id: Comment["id"]
       body: Comment["body"]
     }>
   }>

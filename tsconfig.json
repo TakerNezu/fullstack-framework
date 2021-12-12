@@ -5,7 +5,8 @@
     "baseUrl": ".",
     "paths": {
       "$prisma/*": ["./prisma/node_modules/.prisma/*"],
-      "$mock/*": ["./mock/*"]
+      "$mock/*": ["./mock/*"],
+      "$aspida/*": ["./aspida/*"]
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

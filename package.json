@@ -9,16 +9,18 @@
     "server",
     "front",
     "mock",
-    "prisma"
+    "prisma",
+    "aspida"
   ],
   "scripts": {
+    "mock:build": "esbuild front/frontServer.ts --outfile=mock/frontServer.js --platform=node",
+    "mock:dev": "yarn run mock:build && node front/frontServer.js",
+    "prisma:dev": "cd prisma && yarn -s run prisma migrate dev",
+    "aspida:build": "esbuild aspida/aspida.config.ts --outfile=aspida/aspida.config.js --bundle --platform=node && aspida -c aspida/aspida.config.js",
     "server:build": "esbuild server/server.ts --outfile=server/server.js --bundle --platform=node",
     "server:dev": "yarn run server:build && node server/server.js",
-    "front:build": "esbuild front/src/index.tsx --outfile=front/public/index.js --bundle --platform=browser",
-    "front:dev": "yarn run front:build && yarn run mock:dev",
-    "prisma:dev": "cd prisma && yarn -s run prisma migrate dev",
-    "mock:build": "esbuild mock/api/typeDefinition.ts --outfile=mock/api/typeDefinition.js --bundle --platform=node",
-    "mock:dev": "esbuild front/frontServer.ts --outfile=front/frontServer.js --platform=node && node front/frontServer.js"
+    "front:build": "yarn run aspida:build && esbuild front/src/index.tsx --outfile=front/public/index.js --bundle --platform=browser",
+    "front:dev": "yarn run front:build && yarn run mock:dev"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
@@ -28,8 +30,5 @@
   },
   "msw": {
     "workerDirectory": "front/public"
-  },
-  "dependencies": {
-    "axios": "^0.24.0"
   }
 }
