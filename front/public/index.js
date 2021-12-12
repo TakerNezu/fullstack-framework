@@ -20,6 +20,26 @@
   var __toModule = (module) => {
     return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", module && module.__esModule && "default" in module ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
   };
+  var __async = (__this, __arguments, generator) => {
+    return new Promise((resolve, reject) => {
+      var fulfilled = (value) => {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var rejected = (value) => {
+        try {
+          step(generator.throw(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+      step((generator = generator.apply(__this, __arguments)).next());
+    });
+  };
 
   // node_modules/object-assign/index.js
   var require_object_assign = __commonJS({
@@ -27130,13 +27150,13 @@ spawn('node', ['module.js'], { stdio: ['ipc'] })`);
   // front/src/App.tsx
   var import_react = __toModule(require_react());
   var import_axios = __toModule(require_axios2());
-  var App = () => {
+  var App = () => __async(void 0, null, function* () {
     let admin;
-    import_axios.default.get("/api").then((result) => admin = result.data.admin).catch((err) => console.log(err));
+    yield import_axios.default.get("/api").then((result) => admin = result.data.admin).catch((err) => console.log(err));
     return /* @__PURE__ */ import_react.default.createElement("div", {
       className: "App"
     }, /* @__PURE__ */ import_react.default.createElement("p", null, "\u30CF\u30ED\u30FC React!!"), /* @__PURE__ */ import_react.default.createElement("p", null, admin));
-  };
+  });
   var App_default = App;
 
   // node_modules/msw/lib/esm/fetch-deps.js

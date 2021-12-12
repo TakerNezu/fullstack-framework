@@ -6,6 +6,7 @@ const App: React.FC = () => {
   axios.get('/api')
     .then(result => admin = result.data.admin)
     .catch(err => console.log(err))
+  axios.get('/api/post')
 
   return (
     <div className="App">

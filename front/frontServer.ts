@@ -1,19 +1,23 @@
-import * as http from "http";
-import esbuild from "esbuild"
+import http from "http";
+import {serve, ServeResult} from "esbuild"
 
 // Serves all content from ./dist on :1234.
 // If esbuild 404s the request, the request is attempted again
 // from `/` assuming that it's an SPA route needing to be handled by the root bundle.
-export default async () => {
+(async () => {
   const serverDir: string = "front/public"
   const port: number = 3000
 
-  const {host} = await esbuild.serve({ servedir: serverDir }, {})
-    .then(req => {
+  let startedServer: ServeResult
+
+  // サーバーの起動
+  await serve({ servedir: serverDir }, {})
+    .then(result => {
+      startedServer = result
       console.log('start server!')
     })
     .catch(err => {
-      console.error('server not work!!')
+      console.error(err)
     })
 
   // Create a second (proxy) server that will forward requests to esbuild.
@@ -21,8 +25,8 @@ export default async () => {
     // forwardRequest forwards an http request through to esbuid.
     const forwardRequest = (path: string) => {
       const options: http.RequestOptions = {
-        hostname: host,
-        port,
+        hostname: startedServer.host,
+        port: startedServer.port,
         path,
         method: req.method,
         headers: req.headers,
@@ -36,7 +40,7 @@ export default async () => {
         }
 
         // Otherwise esbuild handled it like a champ, so proxy the response back.
-        res.writeHead(proxyRes.statusCode, proxyRes.headers);
+        res.writeHead(proxyRes.statusCode ?? 505, proxyRes.headers);
         proxyRes.pipe(res, { end: true });
       });
 
@@ -44,9 +48,9 @@ export default async () => {
     };
 
     // When we're called pass the request right through to esbuild.
-    forwardRequest(req.url);
+    forwardRequest(req.url ?? "");
   });
 
   // Start our proxy server at the specified `listen` port.
-  proxy.listen(listen);
-}
+  proxy.listen(port);
+})()
