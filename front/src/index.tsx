@@ -4,15 +4,23 @@ import ReactDOM from 'react-dom';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
 import {worker} from "$mock/browser";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
 
 worker.start()
   .then(result => console.log(result))
   .catch(err => console.log(err))
 
+const queryClient = new QueryClient()
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <QueryClientProvider client={queryClient}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </QueryClientProvider>,
 document.getElementById('root')
 );
 

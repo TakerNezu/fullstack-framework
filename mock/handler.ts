@@ -1,5 +1,5 @@
 import {rest} from "msw"
-import {postRes} from "./api/typeDefinition"
+import {postRes, profileRes} from "./api/typeDefinition"
 
 export const handler = [
   rest.get('/api/post', (req, res, ctx) => {
@@ -10,12 +10,13 @@ export const handler = [
     }
     return res(ctx.status(200), ctx.json(data))
   }),
-  rest.get('/api', (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        username: 'admin',
-      }),
-    )
+  rest.get('/api/profile', (req, res, ctx) => {
+    const data: profileRes = {
+      profile: {
+        id: 1,
+        name: "takeru",
+      }
+    }
+    return res(ctx.status(200), ctx.json(data))
   }),
 ]

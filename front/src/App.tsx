@@ -1,29 +1,20 @@
 import React from 'react'
 import aspida from '@aspida/axios'
 import api from "$aspida/$api"
-import {postRes} from "$mock/api/typeDefinition";
+import { useAspidaQuery } from "@aspida/react-query"
+
+const client = api(aspida())
 
 const App: React.FC = () => {
-  const client = api(aspida())
-  const [admin, setAdmin] = React.useState("")
-  const [posts, setPosts] = React.useState<postRes["post"]>([])
-
-  React.useEffect(() => {
-    const handler = async () => {
-      await client.api.post.get()
-        .then(result => {
-          setPosts(result.body.post)
-          console.log(posts)
-        })
-    }
-    handler()
-  }, [])
+  // Queries
+  const postQuery = useAspidaQuery(client.api.post)
+  const profileQuery = useAspidaQuery(client.api.profile)
 
   return (
     <div className="App">
       <p>ハロー React!!</p>
-      <p>{admin}</p>
-      {/*<p>{posts[0].title}</p>*/}
+      <p>{profileQuery.status === 'success' ? profileQuery.data.profile.name : ''}</p>
+      <p>{postQuery.status === 'success' ? postQuery.data.post[0].title : ''}</p>
     </div>
   )
 }

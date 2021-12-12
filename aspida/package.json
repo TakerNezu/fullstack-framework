@@ -1,4 +1,11 @@
 {
   "name": "aspida",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": {
+    "@aspida/axios": "^1.7.1",
+    "@aspida/react-query": "^1.7.1",
+    "aspida": "^1.7.1",
+    "axios": "^0.24.0",
+    "react-query": "^3.34.2"
+  }
 }
