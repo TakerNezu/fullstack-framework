@@ -32351,11 +32351,6 @@ If this message still persists after updating, please report an issue: https://g
 
   // mock/handler.ts
   var handler = [
-    rest.get("/api/", (req, res, ctx) => {
-      return res(ctx.status(200), ctx.json({
-        username: "admin"
-      }));
-    }),
     rest.get("/api/post", (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(() => {
         return {
@@ -32363,6 +32358,11 @@ If this message still persists after updating, please report an issue: https://g
             { id: 1, title: "aa", author: "author", comment: [{ id: 1, body: "comment" }] }
           ]
         };
+      }));
+    }),
+    rest.get("/api", (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json({
+        username: "admin"
       }));
     })
   ];

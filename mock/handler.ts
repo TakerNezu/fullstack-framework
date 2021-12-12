@@ -2,14 +2,6 @@ import {rest} from "msw"
 import {postRes} from "./api/typeDefinition"
 
 export const handler = [
-  rest.get('/api/', (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        username: 'admin',
-      }),
-    )
-  }),
   rest.get('/api/post', (req, res, ctx) => {
     return res(ctx.status(200), ctx.json((): postRes => {
       return {
@@ -18,5 +10,13 @@ export const handler = [
         ]
       }
     }))
+  }),
+  rest.get('/api', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        username: 'admin',
+      }),
+    )
   }),
 ]
