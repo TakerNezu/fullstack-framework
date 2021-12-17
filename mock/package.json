@@ -1,5 +1,10 @@
 {
   "name": "mock",
   "version": "1.0.0",
-  "type": "module"
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild front/frontServer.ts --outfile=front/frontServer.js --platform=node",
+    "dev": "yarn run mock:build && node front/frontServer.js"
+  }
 }

@@ -1,11 +1,12 @@
 {
   "name": "prisma",
   "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "echo 1"
+  },
   "dependencies": {
     "@prisma/client": "3.6.0",
     "prisma": "^3.6.0"
-  },
-  "devDependencies": {
-    "prisma": "3.6.0"
   }
 }

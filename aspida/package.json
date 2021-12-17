@@ -1,6 +1,11 @@
 {
   "name": "aspida",
   "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "pre-build": "esbuild aspida.config.ts --outfile=aspida.config.js --bundle --platform=node",
+    "build": "yarn run pre-build && aspida -c aspida.config.js"
+  },
   "dependencies": {
     "@aspida/axios": "^1.7.1",
     "@aspida/react-query": "^1.7.1",

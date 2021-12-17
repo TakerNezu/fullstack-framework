@@ -1,4 +1,4 @@
-// aspida/aspida.config.ts
+// aspida.config.ts
 module.exports = {
-  input: "aspida"
+  input: "."
 };

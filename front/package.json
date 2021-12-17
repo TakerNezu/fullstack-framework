@@ -1,7 +1,11 @@
 {
   "name": "front",
   "version": "1.0.0",
+  "license": "MIT",
   "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.tsx --outfile=public/index.js --bundle --platform=browser"
+  },
   "dependencies": {
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
